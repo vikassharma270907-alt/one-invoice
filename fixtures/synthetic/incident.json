@@ -1,0 +1,96 @@
+{
+  "id": "INC-DEMO-001",
+  "invoiceReference": "DEMO-INV-001",
+  "companyName": "Demo Company",
+  "obligation": {
+    "id": "OBL-DEMO-001",
+    "amountMinor": 10000,
+    "currency": "USD",
+    "feeAllowanceMinor": 0,
+    "beneficiary": {
+      "id": "BEN-DEMO-001",
+      "alias": "Demo Design Studio",
+      "fingerprint": "demo:ben:8f3a:c21",
+      "country": "US"
+    },
+    "version": 1
+  },
+  "supplierMessage": {
+    "raw": "Hi — invoice DEMO-INV-001 for USD 100.00 still has not arrived. Please send it again to the same account.",
+    "receivedAt": "2026-10-20T09:00:00.000Z",
+    "trust": "UNTRUSTED"
+  },
+  "state": "ORIGINAL_SENT",
+  "evidence": {
+    "id": "EVD-DEMO-001",
+    "source": "fixture",
+    "fetchedAt": "2026-10-20T09:02:00.000Z",
+    "providerStatus": "SENT",
+    "providerTransferId": "tr_demo_original_001",
+    "providerRequestId": "req_demo_original_001",
+    "availableBalanceMinor": 25000,
+    "currency": "USD",
+    "beneficiaryFingerprint": "demo:ben:8f3a:c21",
+    "amountMinor": 10000,
+    "failureCode": null,
+    "failureDetail": null,
+    "notes": "Synthetic fixture. No provider call has been made."
+  },
+  "attempts": [
+    {
+      "id": "ATT-DEMO-001",
+      "kind": "ORIGINAL",
+      "requestId": "req_demo_original_001",
+      "providerId": "tr_demo_original_001",
+      "providerStatus": "SENT",
+      "failureCode": null,
+      "failureDetail": null,
+      "dispatchState": "ACKNOWLEDGED",
+      "approvedPayloadHash": "fixture-hash-original"
+    }
+  ],
+  "proposal": {
+    "id": "PROP-DEMO-001",
+    "evidenceVersion": "EVD-DEMO-001",
+    "suggestedAction": "WAIT",
+    "reasons": [
+      "The original transfer is still SENT.",
+      "A replacement is blocked until a tested terminal failure is confirmed."
+    ],
+    "evidenceIds": ["EVD-DEMO-001"],
+    "schemaValid": true,
+    "source": "fixture-deterministic"
+  },
+  "approval": null,
+  "timeline": [
+    {
+      "id": "EVT-DEMO-001",
+      "at": "2026-10-20T09:00:00.000Z",
+      "actor": "SUPPLIER",
+      "type": "COMPLAINT_RECEIVED",
+      "summary": "Supplier says invoice DEMO-INV-001 has not arrived.",
+      "correlationId": "corr_demo_001"
+    },
+    {
+      "id": "EVT-DEMO-002",
+      "at": "2026-10-20T09:02:00.000Z",
+      "actor": "SYSTEM",
+      "type": "EVIDENCE_READ",
+      "summary": "Fixture evidence shows the original transfer as SENT.",
+      "correlationId": "corr_demo_001"
+    },
+    {
+      "id": "EVT-DEMO-003",
+      "at": "2026-10-20T09:02:01.000Z",
+      "actor": "SYSTEM",
+      "type": "POLICY_EVALUATED",
+      "summary": "Policy permits WAIT or ESCALATE; replacement remains blocked.",
+      "correlationId": "corr_demo_001"
+    }
+  ],
+  "policyVersion": "demo-policy-v0.1",
+  "labels": {
+    "dataSource": "fixture",
+    "liveCalls": false
+  }
+}
