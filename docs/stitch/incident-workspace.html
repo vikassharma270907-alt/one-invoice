@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ONE INVOICE :: AIRWALLEX RISK MITIGATION RAIL</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Fonts: Inter & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-container": "#e79400",
+            "on-primary-container": "#00424f",
+            "on-surface-variant": "#bcc9cd",
+            "surface-bright": "#363941",
+            "on-tertiary-fixed-variant": "#653e00",
+            "surface-container-high": "#272a32",
+            "inverse-primary": "#00687a",
+            "surface-container-lowest": "#0b0e15",
+            "on-primary-fixed-variant": "#004e5c",
+            "secondary-fixed": "#6ffbbe",
+            "on-primary": "#003640",
+            "on-surface": "#e1e2ec",
+            "on-error-container": "#ffdad6",
+            "on-secondary-fixed-variant": "#005236",
+            "on-secondary": "#003824",
+            "error": "#ffb4ab",
+            "primary-fixed-dim": "#4cd7f6",
+            "on-error": "#690005",
+            "surface": "#10131a",
+            "on-tertiary-fixed": "#2a1700",
+            "on-background": "#e1e2ec",
+            "outline-variant": "#3d494c",
+            "surface-tint": "#4cd7f6",
+            "surface-dim": "#10131a",
+            "on-secondary-container": "#00311f",
+            "primary-fixed": "#acedff",
+            "tertiary-fixed-dim": "#ffb95f",
+            "inverse-surface": "#e1e2ec",
+            "primary-container": "#06b6d4",
+            "outline": "#869397",
+            "on-tertiary": "#472a00",
+            "tertiary-fixed": "#ffddb8",
+            "secondary-fixed-dim": "#4edea3",
+            "on-tertiary-container": "#563400",
+            "surface-container-highest": "#32353d",
+            "surface-variant": "#32353d",
+            "error-container": "#93000a",
+            "surface-container-low": "#191b23",
+            "tertiary": "#ffb95f",
+            "secondary": "#4edea3",
+            "inverse-on-surface": "#2d3038",
+            "secondary-container": "#00a572",
+            "on-primary-fixed": "#001f26",
+            "background": "#10131a",
+            "primary": "#4cd7f6",
+            "on-secondary-fixed": "#002113",
+            "surface-container": "#1d1f27"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-md": "0.75rem",
+            "space-xs": "0.25rem",
+            "gutter-desktop": "1rem",
+            "gutter": "0.75rem",
+            "space-sm": "0.5rem",
+            "margin-desktop": "1.5rem",
+            "space-lg": "1rem",
+            "margin": "1rem",
+            "space-xl": "1.5rem"
+          },
+          "fontFamily": {
+            "label-caps": ["JetBrains Mono"],
+            "body-md": ["Inter"],
+            "headline-lg": ["Inter"],
+            "data-mono-md": ["JetBrains Mono"],
+            "data-mono-lg": ["JetBrains Mono"],
+            "body-sm": ["Inter"],
+            "headline-md": ["Inter"],
+            "data-mono-sm": ["JetBrains Mono"],
+            "body-lg": ["Inter"],
+            "headline-xl": ["Inter"],
+            "headline-sm": ["Inter"]
+          },
+          "fontSize": {
+            "label-caps": ["0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.08em", "fontWeight": "600" }],
+            "body-md": ["0.8125rem", { "lineHeight": "1.25rem", "letterSpacing": "0.005em", "fontWeight": "400" }],
+            "headline-lg": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "data-mono-md": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0em", "fontWeight": "400" }],
+            "data-mono-lg": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+            "body-sm": ["0.75rem", { "lineHeight": "1.125rem", "letterSpacing": "0.01em", "fontWeight": "400" }],
+            "headline-md": ["1rem", { "lineHeight": "1.5rem", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "data-mono-sm": ["0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.02em", "fontWeight": "400" }],
+            "body-lg": ["0.875rem", { "lineHeight": "1.375rem", "letterSpacing": "0em", "fontWeight": "400" }],
+            "headline-xl": ["1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "headline-sm": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      font-size: 16px;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .watermark-hatch {
+      background-image: repeating-linear-gradient(
+        -45deg,
+        rgba(245, 158, 11, 0.03),
+        rgba(245, 158, 11, 0.03) 8px,
+        transparent 8px,
+        transparent 16px
+      );
+    }
+  </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface antialiased font-body-md min-h-screen flex selection:bg-primary-container selection:text-on-primary-container">
+<!-- ========================================================================= -->
+<!-- LEFT RAIL NAVIGATION (SideNavBar: Predicted Blueprint Execution) -->
+<!-- ========================================================================= -->
+<aside class="fixed top-0 left-0 h-full z-40 flex flex-col h-screen w-14 lg:w-64 border-r border-outline-variant bg-surface-container-lowest shrink-0 justify-between">
+<!-- Top Brand & Tabs -->
+<div class="flex flex-col">
+<!-- Brand Emblem Block -->
+<div class="h-12 border-b border-outline-variant flex items-center px-3 gap-3">
+<div class="w-8 h-8 rounded-xs bg-primary text-on-primary flex items-center justify-center font-bold font-headline-sm shrink-0">
+          1
+        </div>
+<div class="hidden lg:flex flex-col truncate">
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface font-label-caps tracking-wider truncate">ONE INVOICE</span>
+<span class="text-label-caps font-label-caps text-outline truncate text-[10px] leading-tight">Airwallex Sandbox</span>
+</div>
+</div>
+<!-- Navigation Rail Items -->
+<nav class="flex flex-col py-2 gap-0.5">
+<!-- Active Tab: Incident Workspace -->
+<a class="flex items-center gap-3 px-3 py-2 bg-surface-container text-primary border-l-2 border-primary font-label-caps transition-colors duration-150 ease-in-out" href="#incident-workspace">
+<span class="material-symbols-outlined" data-icon="shield_with_heart" style="font-variation-settings: 'FILL' 1;">shield_with_heart</span>
+<span class="hidden lg:inline text-label-caps font-label-caps">Incident Workspace</span>
+</a>
+<!-- Inactive Tab: Evidence Vault -->
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant font-label-caps hover:bg-surface-container hover:text-on-surface transition-colors duration-150 ease-in-out" href="#evidence">
+<span class="material-symbols-outlined" data-icon="folder_managed">folder_managed</span>
+<span class="hidden lg:inline text-label-caps font-label-caps">Evidence Vault</span>
+</a>
+<!-- Inactive Tab: Approvals Queue -->
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant font-label-caps hover:bg-surface-container hover:text-on-surface transition-colors duration-150 ease-in-out" href="#approvals">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+<span class="hidden lg:inline text-label-caps font-label-caps">Approvals Queue</span>
+</a>
+<!-- Inactive Tab: Audit Log -->
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant font-label-caps hover:bg-surface-container hover:text-on-surface transition-colors duration-150 ease-in-out" href="#timeline">
+<span class="material-symbols-outlined" data-icon="history_toggle_off">history_toggle_off</span>
+<span class="hidden lg:inline text-label-caps font-label-caps">Audit Log</span>
+</a>
+</nav>
+</div>
+<!-- Bottom Rail Controls & Track Indicator -->
+<div class="flex flex-col border-t border-outline-variant p-2 gap-1 bg-surface-container-low">
+<a class="flex items-center gap-2 px-2 py-1.5 text-on-surface-variant hover:text-primary transition-colors text-label-caps font-label-caps rounded-xs" href="#telemetry">
+<span class="material-symbols-outlined" data-icon="monitor_heart">monitor_heart</span>
+<span class="hidden lg:inline text-label-caps font-label-caps">Integration Health</span>
+</a>
+<a class="flex items-center gap-2 px-2 py-1.5 text-on-surface-variant hover:text-primary transition-colors text-label-caps font-label-caps rounded-xs" href="#settings">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="hidden lg:inline text-label-caps font-label-caps">Telemetry Settings</span>
+</a>
+<!-- Airwallex Track 3 Sandbox Emblem -->
+<div class="mt-1 pt-2 border-t border-outline-variant/50 hidden lg:flex items-center justify-between px-1">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span class="text-[10px] font-label-caps text-on-surface-variant uppercase tracking-wider">Airwallex Track 3</span>
+</div>
+<span class="text-label-caps font-label-caps text-tertiary bg-tertiary-container/20 px-1 py-0.5 border border-tertiary/30 text-[9px]">sandbox</span>
+</div>
+</div>
+</aside>
+<!-- ========================================================================= -->
+<!-- MAIN WORKSPACE CONTAINER -->
+<!-- ========================================================================= -->
+<div class="flex-1 flex flex-col ml-14 lg:ml-64 min-w-0">
+<!-- TOP GLOBAL BAR (TopNavBar: Predicted Blueprint Execution) -->
+<header class="w-full h-12 flex items-center justify-between px-4 sticky top-0 z-30 bg-surface-container-lowest border-b border-outline-variant">
+<!-- Left: Title & Subtitle / Tagline -->
+<div class="flex items-center gap-3">
+<div class="flex items-baseline gap-2">
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface font-label-caps tracking-widest">ONE INVOICE</span>
+<span class="hidden xl:inline text-body-sm font-body-sm text-outline border-l border-outline-variant pl-2">One invoice. One successful payment.</span>
+</div>
+</div>
+<!-- Center: Status Strip Chips (Literal Transcription) -->
+<div class="flex items-center gap-1.5 overflow-x-auto">
+<span class="text-secondary font-label-caps px-2 py-0.5 bg-surface-container border border-secondary-container rounded-xs text-[10px]">SANDBOX</span>
+<span class="text-on-surface-variant font-label-caps px-2 py-0.5 bg-surface-container-low border border-outline-variant rounded-xs text-[10px]">FIXTURE DATA</span>
+<span class="text-tertiary font-label-caps px-2 py-0.5 bg-tertiary-container/10 border border-tertiary/30 rounded-xs text-[10px]">NO LIVE CALLS</span>
+<span class="text-on-surface-variant font-label-caps px-2 py-0.5 bg-surface-container-low border border-outline-variant rounded-xs text-[10px]">0 VERIFIED CALLS</span>
+</div>
+<!-- Right: Operator Session Badge -->
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1.5 px-2.5 py-1 bg-surface-container border border-error/40 rounded-xs">
+<span class="material-symbols-outlined text-error" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface font-medium">INC-DEMO-001</span>
+<span class="text-[10px] font-label-caps text-error bg-error-container/40 px-1 py-0.2 rounded-xs ml-1">[LOCKED]</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant border-l border-outline-variant pl-2">
+<button class="p-1 hover:text-primary transition-colors" title="Terminal Telemetry">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+</button>
+<button class="p-1 hover:text-primary transition-colors relative" title="System Alerts">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-error"></span>
+</button>
+</div>
+</div>
+</header>
+<!-- MAIN SCROLLABLE CONTENT CANVAS (Max 1440px desktop layout constraints) -->
+<main class="w-full max-w-[1440px] mx-auto p-4 lg:p-6 space-y-4">
+<!-- ========================================================================= -->
+<!-- INCIDENT SUMMARY CARD (Full Width Above 2 Columns) -->
+<!-- ========================================================================= -->
+<section class="bg-surface-container-low border border-outline-variant rounded-DEFAULT p-4 relative overflow-hidden">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3 pb-3 border-b border-outline-variant">
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2">
+<span class="font-label-caps text-label-caps text-outline">INCIDENT ID</span>
+<span class="font-data-mono-lg text-data-mono-lg font-bold text-on-surface">INC-DEMO-001</span>
+</div>
+<!-- Prominent App State Badge -->
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xs bg-error-container/20 border border-error/80 text-error">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-ping"></span>
+<span class="font-label-caps text-label-caps font-bold tracking-wider">ORIGINAL SENT — REPLACEMENT BLOCKED</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-caps text-label-caps text-outline">DATA SOURCE:</span>
+<span class="font-label-caps text-label-caps text-primary bg-primary-container/20 border border-primary/40 px-2 py-0.5 rounded-xs">
+              FIXTURE · live calls off
+            </span>
+</div>
+</div>
+<!-- Metadata Grid -->
+<div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-3 pt-3">
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-outline">COMPANY</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium truncate">Demo Company</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-outline">INVOICE</span>
+<span class="font-data-mono-sm text-data-mono-sm text-primary font-medium truncate">DEMO-INV-001</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-outline">AMOUNT</span>
+<span class="font-data-mono-md text-data-mono-md font-bold text-on-surface">$100.00 USD</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-outline">FEE ALLOWANCE</span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant">$0.00</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-outline">TRUSTED PAYEE</span>
+<span class="font-body-sm text-body-sm text-on-surface truncate">Demo Design Studio</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-outline">PAYEE FINGERPRINT</span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface bg-surface-container px-1.5 py-0.5 rounded-xs border border-outline-variant/60 truncate" title="demo:ben:8f3a:c21">demo:ben:8f3a:c21</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-outline">ORIGINAL REQUEST</span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant truncate" title="req_demo_original_001">req_demo_original_001</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-outline">ORIGINAL TRANSFER</span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant truncate" title="tr_demo_original_001">tr_demo_original_001</span>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- COMPACT POLICY PROGRESS STRIP (Segmental Rule Evaluation) -->
+<!-- ========================================================================= -->
+<section class="bg-surface-container border border-outline-variant rounded-DEFAULT p-3">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Deterministic Policy Evaluation Strip</span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant">RULE-SPEC: DISBURSE_GUARD_R01</span>
+</div>
+<!-- 4-stage progression bar -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-2">
+<!-- Stage 1: Original Sent (Active / Glowing) -->
+<div class="flex flex-col p-2 rounded-xs bg-primary/10 border-l-2 border-primary border-t border-r border-b border-outline-variant">
+<div class="flex items-center justify-between text-primary mb-1">
+<span class="font-label-caps text-[11px] font-bold">1. Original sent</span>
+<span class="material-symbols-outlined text-primary text-[14px]" data-icon="sync" style="font-variation-settings: 'FILL' 1;">sync</span>
+</div>
+<span class="font-data-mono-sm text-data-mono-sm text-primary font-medium">SENT (IN-FLIGHT)</span>
+</div>
+<!-- Stage 2: Terminal failure confirmed (Waiting) -->
+<div class="flex flex-col p-2 rounded-xs bg-surface-container-low border border-outline-variant opacity-80">
+<div class="flex items-center justify-between text-on-surface-variant mb-1">
+<span class="font-label-caps text-[11px]">2. Terminal failure</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
+</div>
+<span class="font-data-mono-sm text-data-mono-sm text-outline">UNCONFIRMED</span>
+</div>
+<!-- Stage 3: Exact approval (Locked) -->
+<div class="flex flex-col p-2 rounded-xs bg-error-container/10 border border-error/40">
+<div class="flex items-center justify-between text-error mb-1">
+<span class="font-label-caps text-[11px]">3. Exact approval</span>
+<span class="material-symbols-outlined text-error text-[14px]" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+</div>
+<span class="font-data-mono-sm text-data-mono-sm text-error/80">LOCKED</span>
+</div>
+<!-- Stage 4: One replacement (Locked) -->
+<div class="flex flex-col p-2 rounded-xs bg-error-container/10 border border-error/40">
+<div class="flex items-center justify-between text-error mb-1">
+<span class="font-label-caps text-[11px]">4. One replacement</span>
+<span class="material-symbols-outlined text-error text-[14px]" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+</div>
+<span class="font-data-mono-sm text-data-mono-sm text-error/80">LOCKED</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2.5 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-error text-[15px]" data-icon="info">info</span>
+          Original transfer is currently in SENT status. Deterministic policy strictly blocks replacement disbursement and approval authorization.
+        </p>
+</section>
+<!-- ========================================================================= -->
+<!-- TWO-COLUMN OPERATIONS GRID -->
+<!-- ========================================================================= -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+<!-- ===================================================================== -->
+<!-- LEFT COLUMN: Primary Incident Flow (7 cols) -->
+<!-- ===================================================================== -->
+<div class="lg:col-span-7 space-y-4">
+<!-- 01 · Supplier Message Card (Untrusted Payload Inspection) -->
+<div class="bg-surface-container-low border border-outline-variant rounded-DEFAULT overflow-hidden watermark-hatch">
+<!-- Header with Amber Badge -->
+<div class="p-3 bg-surface-container border-b border-outline-variant flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">01 · Supplier message</span>
+</div>
+<span class="font-label-caps text-label-caps text-tertiary bg-tertiary-container/20 border border-tertiary/40 px-2 py-0.5 rounded-xs flex items-center gap-1">
+<span class="material-symbols-outlined text-tertiary text-[12px]" data-icon="warning">warning</span>
+                UNTRUSTED SUPPLIER CONTENT
+              </span>
+</div>
+<!-- Content Enclosure -->
+<div class="p-3.5 space-y-3">
+<!-- Raw Supplier Payload Box -->
+<div class="p-3 bg-surface-container-lowest border-l-2 border-tertiary border-t border-r border-b border-outline-variant rounded-xs space-y-1.5">
+<div class="flex items-center justify-between text-[11px] font-label-caps text-outline">
+<span>RAW_PAYLOAD_EXTRACT [INBOUND_EMAIL]</span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant">Received 20 Oct 2026, 09:00 UTC</span>
+</div>
+<p class="font-data-mono-md text-data-mono-md text-tertiary">
+                  "Hi — invoice DEMO-INV-001 for USD 100.00 still has not arrived. Please send it again to the same account."
+                </p>
+</div>
+<!-- Two Sub-columns: Extracted Claims vs Missing Evidence -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
+<!-- Extracted Claims -->
+<div class="bg-surface-container p-2.5 rounded-xs border border-outline-variant/60">
+<div class="font-label-caps text-label-caps text-outline mb-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]" data-icon="assignment_late">assignment_late</span>
+                    Extracted Claims
+                  </div>
+<ul class="space-y-1.5 font-body-sm text-body-sm text-on-surface">
+<li class="flex items-start gap-1.5">
+<span class="text-tertiary font-bold text-[11px] leading-tight">•</span>
+<span>Claim: Non-receipt of funds</span>
+</li>
+<li class="flex items-start gap-1.5">
+<span class="text-tertiary font-bold text-[11px] leading-tight">•</span>
+<span>Claim: Request for second transfer</span>
+</li>
+<li class="flex items-start gap-1.5">
+<span class="text-tertiary font-bold text-[11px] leading-tight">•</span>
+<span>Beneficiary: <code class="font-data-mono-sm text-primary">same account</code></span>
+</li>
+</ul>
+</div>
+<!-- Missing / Blocked Evidence -->
+<div class="bg-surface-container p-2.5 rounded-xs border border-outline-variant/60">
+<div class="font-label-caps text-label-caps text-error mb-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-error" data-icon="block">block</span>
+                    Missing / Blocked Evidence
+                  </div>
+<ul class="space-y-1.5 font-body-sm text-body-sm text-on-surface-variant">
+<li class="flex items-start gap-1.5">
+<span class="text-error font-bold text-[11px] leading-tight">•</span>
+<span>No proof of terminal failure</span>
+</li>
+<li class="flex items-start gap-1.5">
+<span class="text-error font-bold text-[11px] leading-tight">•</span>
+<span>No reversal receipt</span>
+</li>
+<li class="flex items-start gap-1.5">
+<span class="text-error font-bold text-[11px] leading-tight">•</span>
+<span>Duplicate transfer blocked by rule <code class="font-data-mono-sm text-error">R-INV-01</code></span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Action row: The ONLY enabled action -->
+<div class="pt-2 flex justify-end">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-surface-container border border-outline hover:border-primary text-on-surface hover:text-primary transition-colors text-label-caps font-label-caps rounded-xs shadow-sm">
+<span class="material-symbols-outlined text-[14px]" data-icon="refresh">refresh</span>
+                  Re-analyse complaint
+                </button>
+</div>
+</div>
+</div>
+<!-- 02 · Evidence Card -->
+<div class="bg-surface-container-low border border-outline-variant rounded-DEFAULT p-3.5 space-y-3">
+<div class="flex items-center justify-between border-b border-outline-variant pb-2">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">02 · Evidence</span>
+<span class="font-label-caps text-label-caps text-primary bg-primary-container/20 border border-primary/40 px-2 py-0.5 rounded-xs">
+                FIXTURE TELEMETRY
+              </span>
+</div>
+<!-- Key-value Evidence Table -->
+<div class="border border-outline-variant rounded-xs overflow-hidden">
+<table class="w-full text-left border-collapse">
+<tbody class="divide-y divide-outline-variant/40 font-body-sm text-body-sm">
+<tr class="hover:bg-surface-container">
+<td class="p-2 font-label-caps text-outline w-1/3">PROVIDER STATUS</td>
+<td class="p-2 font-data-mono-sm">
+<span class="inline-flex items-center px-2 py-0.5 rounded-xs bg-primary-container/20 text-primary border border-primary/40 font-medium">
+                        SENT
+                      </span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container">
+<td class="p-2 font-label-caps text-outline">AVAILABLE BALANCE</td>
+<td class="p-2 font-data-mono-md text-data-mono-md text-on-surface">$250.00 USD</td>
+</tr>
+<tr class="hover:bg-surface-container">
+<td class="p-2 font-label-caps text-outline">TRANSFER ID</td>
+<td class="p-2 font-data-mono-sm text-data-mono-sm text-primary">tr_demo_original_001</td>
+</tr>
+<tr class="hover:bg-surface-container">
+<td class="p-2 font-label-caps text-outline">REQUEST ID</td>
+<td class="p-2 font-data-mono-sm text-data-mono-sm text-on-surface-variant">req_demo_original_001</td>
+</tr>
+<tr class="hover:bg-surface-container">
+<td class="p-2 font-label-caps text-outline">FAILURE CODE</td>
+<td class="p-2 font-data-mono-sm text-data-mono-sm text-outline">none</td>
+</tr>
+<tr class="hover:bg-surface-container">
+<td class="p-2 font-label-caps text-outline">LAST EVIDENCE READ</td>
+<td class="p-2 font-data-mono-sm text-data-mono-sm text-on-surface-variant">20 Oct 2026, 09:02 UTC</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Synthetic Notice Banner -->
+<div class="p-2 bg-surface-container border border-outline-variant rounded-xs flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-outline" data-icon="science">science</span>
+                Synthetic fixture. No provider call has been made.
+              </span>
+<div class="flex items-center gap-2">
+<span class="font-body-sm text-[11px] text-outline italic">Live refresh intentionally disabled.</span>
+<button class="inline-flex items-center gap-1 px-2.5 py-1 bg-surface-container-high text-outline cursor-not-allowed border border-outline-variant/60 font-label-caps text-label-caps opacity-60 rounded-xs" disabled="">
+<span class="material-symbols-outlined text-[12px]" data-icon="lock">lock</span>
+                  Refresh evidence
+                </button>
+</div>
+</div>
+</div>
+<!-- 03 · Decision Card -->
+<div class="bg-surface-container-low border border-outline-variant rounded-DEFAULT p-3.5 space-y-3">
+<div class="flex items-center justify-between border-b border-outline-variant pb-2">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">03 · Decision</span>
+<span class="font-data-mono-sm text-data-mono-sm text-outline">VERDICT: BLOCKED</span>
+</div>
+<!-- Policy Conclusion Banner in Coral/Red Box -->
+<div class="p-3 rounded-xs bg-error-container/20 border-l-2 border-error border-t border-r border-b border-error/50">
+<div class="flex items-center gap-2 text-error">
+<span class="material-symbols-outlined text-[16px]" data-icon="gavel" style="font-variation-settings: 'FILL' 1;">gavel</span>
+<span class="font-label-caps text-label-caps font-bold">Policy Conclusion: Original sent — replacement blocked</span>
+</div>
+</div>
+<!-- Chips Section: Allowed vs Blocked -->
+<div class="space-y-2">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-label-caps text-[10px] text-outline w-24">ALLOWED PATHS:</span>
+<span class="font-label-caps text-label-caps text-secondary bg-secondary-container/20 border border-secondary-container px-2 py-0.5 rounded-xs flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="check_circle">check_circle</span>
+                  WAIT
+                </span>
+<span class="font-label-caps text-label-caps text-secondary bg-secondary-container/20 border border-secondary-container px-2 py-0.5 rounded-xs flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="trending_up">trending_up</span>
+                  ESCALATE
+                </span>
+</div>
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-label-caps text-[10px] text-outline w-24">BLOCKED PATHS:</span>
+<span class="font-label-caps text-label-caps text-error bg-error-container/20 border border-error/40 px-2 py-0.5 rounded-xs line-through opacity-75 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="lock">lock</span>
+                  PREPARE REPLACEMENT
+                </span>
+<span class="font-label-caps text-label-caps text-error bg-error-container/20 border border-error/40 px-2 py-0.5 rounded-xs line-through opacity-75 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="lock">lock</span>
+                  APPROVE EXACT TERMS
+                </span>
+<span class="font-label-caps text-label-caps text-error bg-error-container/20 border border-error/40 px-2 py-0.5 rounded-xs line-through opacity-75 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="lock">lock</span>
+                  EXECUTE APPROVED REPLACEMENT
+                </span>
+</div>
+</div>
+<!-- Backend Reasons -->
+<div class="p-2.5 bg-surface-container rounded-xs border border-outline-variant space-y-1.5">
+<span class="font-label-caps text-label-caps text-outline">DETERMINISTIC EVALUATION REASONS</span>
+<ul class="space-y-1 font-body-sm text-body-sm text-on-surface">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-[14px]" data-icon="info">info</span>
+                  The original transfer is still SENT.
+                </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-[14px]" data-icon="shield">shield</span>
+                  A replacement is blocked until a tested terminal failure is confirmed.
+                </li>
+</ul>
+</div>
+<!-- Model Proposal Row -->
+<div class="flex flex-wrap items-center justify-between p-2 bg-surface-container-high rounded-xs border border-outline-variant text-body-sm">
+<span class="text-on-surface-variant font-label-caps text-label-caps">Model proposal · fixture analyzer</span>
+<div class="flex items-center gap-2">
+<span class="font-label-caps text-label-caps text-secondary bg-secondary-container/20 border border-secondary-container px-2 py-0.5 rounded-xs font-bold">[WAIT]</span>
+<span class="font-data-mono-sm text-data-mono-sm text-outline">Evidence: EVD-DEMO-001</span>
+</div>
+</div>
+<!-- Action Triggers (All Locked) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-2 pt-1">
+<button class="px-2 py-2 bg-surface-container border border-outline-variant text-outline cursor-not-allowed opacity-50 flex items-center justify-center gap-1 font-label-caps text-label-caps rounded-xs" disabled="">
+<span class="material-symbols-outlined text-[12px]" data-icon="lock">lock</span>
+                Prepare replacement
+              </button>
+<button class="px-2 py-2 bg-surface-container border border-outline-variant text-outline cursor-not-allowed opacity-50 flex items-center justify-center gap-1 font-label-caps text-label-caps rounded-xs" disabled="">
+<span class="material-symbols-outlined text-[12px]" data-icon="lock">lock</span>
+                Approve exact terms
+              </button>
+<button class="px-2 py-2 bg-surface-container border border-outline-variant text-outline cursor-not-allowed opacity-50 flex items-center justify-center gap-1 font-label-caps text-label-caps rounded-xs" disabled="">
+<span class="material-symbols-outlined text-[12px]" data-icon="lock">lock</span>
+                Execute approved replacement
+              </button>
+</div>
+</div>
+<!-- 04 · Timeline Card -->
+<div class="bg-surface-container-low border border-outline-variant rounded-DEFAULT p-3.5 space-y-3">
+<div class="flex items-center justify-between border-b border-outline-variant pb-2">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">04 · Timeline</span>
+<span class="font-data-mono-sm text-data-mono-sm text-outline">Correlation ID: corr_demo_001</span>
+</div>
+<!-- Timeline Entries with Vertical Trace Line -->
+<div class="relative pl-5 space-y-4 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-outline-variant">
+<!-- Event 1: Amber dot -->
+<div class="relative flex flex-col">
+<div class="absolute -left-[19px] top-1 w-2.5 h-2.5 rounded-full bg-tertiary border-2 border-surface-container-lowest"></div>
+<div class="flex items-baseline justify-between">
+<span class="font-label-caps text-label-caps text-tertiary">COMPLAINT_RECEIVED</span>
+<span class="font-data-mono-sm text-data-mono-sm text-outline">20 Oct 2026, 09:00 UTC</span>
+</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-1">
+<span>Origin:</span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface bg-surface-container px-1 rounded-xs">SUPPLIER</span>
+<span class="text-outline text-[11px]">— Inbound complaint claimed non-arrival of USD 100.00.</span>
+</div>
+</div>
+<!-- Event 2: Cyan dot -->
+<div class="relative flex flex-col">
+<div class="absolute -left-[19px] top-1 w-2.5 h-2.5 rounded-full bg-primary border-2 border-surface-container-lowest"></div>
+<div class="flex items-baseline justify-between">
+<span class="font-label-caps text-label-caps text-primary">EVIDENCE_READ</span>
+<span class="font-data-mono-sm text-data-mono-sm text-outline">20 Oct 2026, 09:02 UTC</span>
+</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-1">
+<span>Origin:</span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface bg-surface-container px-1 rounded-xs">SYSTEM</span>
+<span class="text-outline text-[11px]">— Read transfer state <code class="font-data-mono-sm text-primary">tr_demo_original_001</code> status: SENT.</span>
+</div>
+</div>
+<!-- Event 3: Coral dot -->
+<div class="relative flex flex-col">
+<div class="absolute -left-[19px] top-1 w-2.5 h-2.5 rounded-full bg-error border-2 border-surface-container-lowest"></div>
+<div class="flex items-baseline justify-between">
+<span class="font-label-caps text-label-caps text-error">POLICY_EVALUATED</span>
+<span class="font-data-mono-sm text-data-mono-sm text-outline">20 Oct 2026, 09:02:01 UTC</span>
+</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-1">
+<span>Origin:</span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface bg-surface-container px-1 rounded-xs">SYSTEM</span>
+<span class="text-outline text-[11px]">— Disbursement block triggered. Replacement locked under rule R-INV-01.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ===================================================================== -->
+<!-- RIGHT COLUMN: Governance, Guardrails & Infrastructure (5 cols) -->
+<!-- ===================================================================== -->
+<div class="lg:col-span-5 space-y-4">
+<!-- Approval Panel Card -->
+<div class="bg-surface-container-low border border-outline-variant rounded-DEFAULT p-3.5 space-y-3">
+<div class="flex items-center justify-between border-b border-outline-variant pb-2">
+<div>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface block">Approval panel</span>
+<span class="font-label-caps text-[11px] text-outline">Exact terms only</span>
+</div>
+<span class="font-label-caps text-label-caps text-error bg-error-container/20 border border-error/40 px-2 py-0.5 rounded-xs flex items-center gap-1">
+<span class="material-symbols-outlined text-error text-[12px]" data-icon="lock">lock</span>
+                NO APPROVAL
+              </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              This approval authorises one replacement attempt on these terms only.
+            </p>
+<!-- Definition List: Structured 2-column key values -->
+<div class="p-2.5 bg-surface-container rounded-xs border border-outline-variant space-y-1.5 font-data-mono-sm text-data-mono-sm">
+<div class="flex justify-between py-0.5 border-b border-outline-variant/30">
+<span class="text-outline font-label-caps text-[10px]">BENEFICIARY</span>
+<span class="text-on-surface">Demo Design Studio</span>
+</div>
+<div class="flex justify-between py-0.5 border-b border-outline-variant/30">
+<span class="text-outline font-label-caps text-[10px]">FINGERPRINT</span>
+<span class="text-primary truncate max-w-[160px]">demo:ben:8f3a:c21</span>
+</div>
+<div class="flex justify-between py-0.5 border-b border-outline-variant/30">
+<span class="text-outline font-label-caps text-[10px]">INVOICE</span>
+<span class="text-on-surface">DEMO-INV-001</span>
+</div>
+<div class="flex justify-between py-0.5 border-b border-outline-variant/30">
+<span class="text-outline font-label-caps text-[10px]">AMOUNT</span>
+<span class="text-on-surface font-medium">$100.00 USD</span>
+</div>
+<div class="flex justify-between py-0.5 border-b border-outline-variant/30">
+<span class="text-outline font-label-caps text-[10px]">FEE ALLOWANCE</span>
+<span class="text-outline">$0.00</span>
+</div>
+<div class="flex justify-between py-0.5 border-b border-outline-variant/30">
+<span class="text-outline font-label-caps text-[10px]">ORIGINAL REQUEST</span>
+<span class="text-outline truncate max-w-[160px]">req_demo_original_001</span>
+</div>
+<div class="flex justify-between py-0.5 border-b border-outline-variant/30">
+<span class="text-outline font-label-caps text-[10px]">EVIDENCE VERSION</span>
+<span class="text-on-surface-variant">EVD-DEMO-001</span>
+</div>
+<div class="flex justify-between py-0.5 border-b border-outline-variant/30">
+<span class="text-outline font-label-caps text-[10px]">POLICY VERSION</span>
+<span class="text-on-surface-variant">demo-policy-v0.1</span>
+</div>
+<div class="flex justify-between py-0.5">
+<span class="text-outline font-label-caps text-[10px]">EXPIRY</span>
+<span class="text-error font-semibold">Not issued</span>
+</div>
+</div>
+<!-- Amber Alert Callout Box -->
+<div class="p-2.5 rounded-xs bg-tertiary-container/10 border border-tertiary/40 flex items-start gap-2">
+<span class="material-symbols-outlined text-tertiary text-[16px] shrink-0 mt-0.5" data-icon="warning">warning</span>
+<p class="font-body-sm text-body-sm text-on-surface">
+                No approval can be prepared while the original is SENT. The server blocks replacement before any approval exists.
+              </p>
+</div>
+<!-- Disabled Action Button -->
+<button class="w-full py-2 bg-surface-container-high border border-outline-variant text-outline cursor-not-allowed opacity-50 flex items-center justify-center gap-1.5 font-label-caps text-label-caps rounded-xs" disabled="">
+<span class="material-symbols-outlined text-[14px]" data-icon="lock">lock</span>
+              Approve exact terms
+            </button>
+</div>
+<!-- Separate Demo Driver Card -->
+<div class="bg-surface-container-low border border-outline-variant rounded-DEFAULT p-3.5 space-y-3">
+<div class="flex items-center justify-between border-b border-outline-variant pb-2">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">Separate demo driver</span>
+<span class="font-label-caps text-label-caps text-outline bg-surface-container border border-outline-variant px-2 py-0.5 rounded-xs">
+                NOT IMPLEMENTED
+              </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Funding, transfer simulation, and failure-injection controls are intentionally absent. The model has no route that can create the facts used to justify a payment.
+            </p>
+<button class="w-full py-1.5 bg-surface-container border border-outline-variant text-outline cursor-not-allowed opacity-50 font-label-caps text-label-caps rounded-xs" disabled="">
+              Open demo driver
+            </button>
+</div>
+<!-- Integration Status Card -->
+<div class="bg-surface-container-low border border-outline-variant rounded-DEFAULT p-3.5 space-y-3">
+<div class="flex items-center justify-between border-b border-outline-variant pb-2">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">Integration status</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant bg-surface-container border border-outline-variant px-2 py-0.5 rounded-xs">
+                0 VERIFIED CALLS
+              </span>
+</div>
+<!-- Status Indicators List -->
+<div class="space-y-2 font-data-mono-sm text-data-mono-sm">
+<div class="flex items-center justify-between p-2 bg-surface-container rounded-xs border border-outline-variant/60">
+<span class="font-label-caps text-[11px] text-outline">Airwallex Rail</span>
+<span class="font-label-caps text-label-caps text-tertiary bg-tertiary-container/15 border border-tertiary/30 px-2 py-0.5 rounded-xs">
+                  [NOT_CONFIGURED]
+                </span>
+</div>
+<div class="flex items-center justify-between p-2 bg-surface-container rounded-xs border border-outline-variant/60">
+<span class="font-label-caps text-[11px] text-outline">Database Ledger</span>
+<span class="font-label-caps text-label-caps text-tertiary bg-tertiary-container/15 border border-tertiary/30 px-2 py-0.5 rounded-xs">
+                  [NOT_CONFIGURED]
+                </span>
+</div>
+<div class="flex items-center justify-between p-2 bg-surface-container rounded-xs border border-outline-variant/60">
+<span class="font-label-caps text-[11px] text-outline">Model Engine</span>
+<span class="font-label-caps text-label-caps text-primary bg-primary-container/15 border border-primary/30 px-2 py-0.5 rounded-xs">
+                  [FIXTURE_ONLY]
+                </span>
+</div>
+<div class="flex items-center justify-between p-2 bg-surface-container rounded-xs border border-outline-variant/60">
+<span class="font-label-caps text-[11px] text-outline">Live Calls Gate</span>
+<span class="font-label-caps text-label-caps text-error bg-error-container/20 border border-error/40 px-2 py-0.5 rounded-xs">
+                  [DISABLED]
+                </span>
+</div>
+</div>
+<p class="font-body-sm text-[11px] text-outline italic pt-1 leading-normal">
+              A configured environment variable does not prove provider access. Every authenticated call remains unconfirmed until tested.
+            </p>
+</div>
+</div>
+</div>
+</main>
+<!-- ========================================================================= -->
+<!-- FOOTER (Footer: Predicted Blueprint Execution) -->
+<!-- ========================================================================= -->
+<footer class="w-full py-3 px-6 flex flex-col md:flex-row justify-between items-center text-on-surface-variant bg-surface-container-lowest border-t border-outline-variant mt-auto gap-2">
+<div class="flex flex-col md:flex-row md:items-center gap-2 text-body-sm font-body-sm text-outline">
+<span>One Invoice · synthetic sandbox concept · not production banking software.</span>
+<span class="hidden md:inline text-outline-variant">|</span>
+<span>No BeyondFlow or ArmorIQ code. No live provider calls.</span>
+</div>
+<div class="flex items-center gap-4 text-label-caps font-label-caps">
+<a class="hover:text-primary transition-colors text-on-surface-variant" href="#compliance">Compliance Policy</a>
+<a class="hover:text-primary transition-colors text-on-surface-variant" href="#ledger">Audit Ledger Standard</a>
+<a class="hover:text-primary transition-colors text-on-surface-variant" href="#rulespec">Deterministic Rulespec</a>
+</div>
+</footer>
+</div>
+</body></html>

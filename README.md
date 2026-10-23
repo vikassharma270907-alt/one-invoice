@@ -48,12 +48,18 @@ one replacement after a tested terminal failure and an exact human approval.
   and the one-active-approval rule.
 - A deterministic fixture analyzer that extracts claims from untrusted supplier
   text and returns a strict structured schema. It is **not** a live model.
-- A single incident workspace with five sections: incident header, supplier
-  message, evidence, decision, and timeline.
+- A single incident workspace adapted from a Stitch-generated **Terminal
+  Protocol** reference: rail navigation, incident summary, deterministic policy
+  progress strip, supplier message, evidence, decision, timeline, approval
+  terms, demo-driver boundary, and integration status.
 - An approval panel that shows the exact terms but cannot issue an approval in
   this milestone.
 - A separate demo-driver boundary with no funding, simulation, or
   failure-injection controls.
+- The Stitch-generated UI reference and screenshot are archived in
+  [`docs/stitch/`](docs/stitch/). The reference is not served; the React
+  workspace implements the same visual direction with real fixture data and
+  disabled mutation controls.
 - Server-only configuration and redaction helpers.
 - Schema validation, unit tests, linting, and type checking.
 
@@ -181,6 +187,7 @@ compose.yaml                             Local PostgreSQL 17 service
 tests/integration/                       Database-backed integration tests
 fixtures/synthetic/incident.json         Synthetic incident
 docs/UNKNOWNS.md                         Integration unknowns
+docs/stitch/                             Stitch UI reference and screenshot
 docs/sandbox-evidence/                   Empty evidence index
 ```
 
@@ -239,7 +246,7 @@ dispatcher claims, and lost-response handling.
 
 | Area | Status |
 | --- | --- |
-| UI and fixtures | Implemented; fixture-only Vercel deployment |
+| UI and fixtures | Stitch-referenced, fixture-only Vercel deployment |
 | Policy | Implemented for synthetic fixtures |
 | Complaint analysis | Deterministic fixture analyzer only |
 | PostgreSQL durable backend | Implemented and tested locally; production provider not configured |
