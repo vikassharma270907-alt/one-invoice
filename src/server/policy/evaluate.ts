@@ -2,6 +2,7 @@ import type {
   Action,
   Incident,
   IncidentState,
+  ProviderStatus,
 } from "@/server/schemas/incident";
 
 export const POLICY_VERSION = "demo-policy-v0.1";
@@ -16,6 +17,31 @@ export const POLICY_VERSION = "demo-policy-v0.1";
 export const FIXTURE_REPLACEABLE_FAILURE_CODES = [
   "DEMO_SYNTHETIC_FAILURE",
 ] as const;
+
+export type PolicyFacts = {
+  obligation: {
+    amountMinor: number;
+    currency: "USD";
+    feeAllowanceMinor: number;
+    beneficiaryFingerprint: string;
+  };
+  evidence: {
+    id: string;
+    providerStatus: ProviderStatus;
+    providerRequestId: string | null;
+    providerTransferId: string | null;
+    availableBalanceMinor: number;
+    currency: "USD";
+    beneficiaryFingerprint: string;
+    amountMinor: number;
+    failureCode: string | null;
+  };
+  attempts: Array<{
+    kind: "ORIGINAL" | "REPLACEMENT";
+    requestId: string;
+    providerId: string | null;
+  }>;
+};
 
 export type PolicyDecision = {
   state: IncidentState;
@@ -41,7 +67,7 @@ function blockedExcept(allowed: Action[]): Action[] {
 }
 
 function decision(
-  incident: Incident,
+  evidenceVersion: string,
   state: IncidentState,
   allowedActions: Action[],
   reasons: string[],
@@ -54,19 +80,20 @@ function decision(
     reasons,
     replacementAllowed: options.replacementAllowed ?? false,
     requiresApproval: options.requiresApproval ?? false,
-    evidenceVersion: incident.evidence.id,
+    evidenceVersion,
     policyVersion: POLICY_VERSION,
   };
 }
 
-export function evaluatePolicy(incident: Incident): PolicyDecision {
-  const { evidence, obligation, attempts } = incident;
+export function evaluatePolicyFacts(facts: PolicyFacts): PolicyDecision {
+  const { evidence, obligation, attempts } = facts;
   const original = attempts.find((attempt) => attempt.kind === "ORIGINAL");
   const replacement = attempts.find((attempt) => attempt.kind === "REPLACEMENT");
+  const evidenceVersion = evidence.id;
 
   if (!original) {
     return decision(
-      incident,
+      evidenceVersion,
       "ESCALATED",
       ["ESCALATE"],
       ["No original transfer is recorded for this obligation."],
@@ -75,7 +102,7 @@ export function evaluatePolicy(incident: Incident): PolicyDecision {
 
   if (replacement) {
     return decision(
-      incident,
+      evidenceVersion,
       "ESCALATED",
       ["WAIT", "ESCALATE"],
       [
@@ -87,7 +114,7 @@ export function evaluatePolicy(incident: Incident): PolicyDecision {
 
   if (evidence.currency !== obligation.currency) {
     return decision(
-      incident,
+      evidenceVersion,
       "ESCALATED",
       ["ESCALATE"],
       ["The evidence currency does not match the trusted obligation."],
@@ -96,16 +123,16 @@ export function evaluatePolicy(incident: Incident): PolicyDecision {
 
   if (evidence.amountMinor !== obligation.amountMinor) {
     return decision(
-      incident,
+      evidenceVersion,
       "ESCALATED",
       ["ESCALATE"],
       ["The evidence amount does not match the trusted obligation."],
     );
   }
 
-  if (evidence.beneficiaryFingerprint !== obligation.beneficiary.fingerprint) {
+  if (evidence.beneficiaryFingerprint !== obligation.beneficiaryFingerprint) {
     return decision(
-      incident,
+      evidenceVersion,
       "ESCALATED",
       ["ESCALATE"],
       ["The evidence payee fingerprint does not match the approved beneficiary."],
@@ -117,7 +144,7 @@ export function evaluatePolicy(incident: Incident): PolicyDecision {
     evidence.providerRequestId !== original.requestId
   ) {
     return decision(
-      incident,
+      evidenceVersion,
       "ESCALATED",
       ["ESCALATE"],
       ["The evidence request ID does not match the recorded original request."],
@@ -130,7 +157,7 @@ export function evaluatePolicy(incident: Incident): PolicyDecision {
     evidence.providerTransferId !== original.providerId
   ) {
     return decision(
-      incident,
+      evidenceVersion,
       "ESCALATED",
       ["ESCALATE"],
       ["The evidence transfer ID does not match the recorded original transfer."],
@@ -140,7 +167,7 @@ export function evaluatePolicy(incident: Incident): PolicyDecision {
   switch (evidence.providerStatus) {
     case "PAID":
       return decision(
-        incident,
+        evidenceVersion,
         "ORIGINAL_PAID",
         ["WAIT", "ESCALATE"],
         [
@@ -151,7 +178,7 @@ export function evaluatePolicy(incident: Incident): PolicyDecision {
 
     case "SENT":
       return decision(
-        incident,
+        evidenceVersion,
         "ORIGINAL_SENT",
         ["WAIT", "ESCALATE"],
         [
@@ -162,7 +189,7 @@ export function evaluatePolicy(incident: Incident): PolicyDecision {
 
     case "UNKNOWN":
       return decision(
-        incident,
+        evidenceVersion,
         "ESCALATED",
         ["WAIT", "ESCALATE"],
         [
@@ -173,7 +200,7 @@ export function evaluatePolicy(incident: Incident): PolicyDecision {
 
     case "CANCELLED":
       return decision(
-        incident,
+        evidenceVersion,
         "ESCALATED",
         ["ESCALATE"],
         [
@@ -190,7 +217,7 @@ export function evaluatePolicy(incident: Incident): PolicyDecision {
         )
       ) {
         return decision(
-          incident,
+          evidenceVersion,
           "ESCALATED",
           ["ESCALATE"],
           [
@@ -204,7 +231,7 @@ export function evaluatePolicy(incident: Incident): PolicyDecision {
         obligation.amountMinor + obligation.feeAllowanceMinor;
       if (evidence.availableBalanceMinor < requiredMinor) {
         return decision(
-          incident,
+          evidenceVersion,
           "ESCALATED",
           ["ESCALATE"],
           [
@@ -215,7 +242,7 @@ export function evaluatePolicy(incident: Incident): PolicyDecision {
       }
 
       return decision(
-        incident,
+        evidenceVersion,
         "FAILURE_CONFIRMED_REPLACEABLE",
         ["WAIT", "ESCALATE", "PREPARE_REPLACEMENT"],
         [
@@ -228,10 +255,37 @@ export function evaluatePolicy(incident: Incident): PolicyDecision {
 
     default:
       return decision(
-        incident,
+        evidenceVersion,
         "ESCALATED",
         ["ESCALATE"],
         ["The provider status is not recognised by this policy version."],
       );
   }
+}
+
+export function evaluatePolicy(incident: Incident): PolicyDecision {
+  return evaluatePolicyFacts({
+    obligation: {
+      amountMinor: incident.obligation.amountMinor,
+      currency: incident.obligation.currency,
+      feeAllowanceMinor: incident.obligation.feeAllowanceMinor,
+      beneficiaryFingerprint: incident.obligation.beneficiary.fingerprint,
+    },
+    evidence: {
+      id: incident.evidence.id,
+      providerStatus: incident.evidence.providerStatus,
+      providerRequestId: incident.evidence.providerRequestId,
+      providerTransferId: incident.evidence.providerTransferId,
+      availableBalanceMinor: incident.evidence.availableBalanceMinor,
+      currency: incident.evidence.currency,
+      beneficiaryFingerprint: incident.evidence.beneficiaryFingerprint,
+      amountMinor: incident.evidence.amountMinor,
+      failureCode: incident.evidence.failureCode,
+    },
+    attempts: incident.attempts.map((attempt) => ({
+      kind: attempt.kind,
+      requestId: attempt.requestId,
+      providerId: attempt.providerId,
+    })),
+  });
 }

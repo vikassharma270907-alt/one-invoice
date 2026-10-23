@@ -31,6 +31,7 @@ export const incidentStateSchema = z.enum([
   "ORIGINAL_SENT",
   "ORIGINAL_PAID",
   "FAILURE_CONFIRMED_REPLACEABLE",
+  "REPLACEMENT_PREPARED",
   "ESCALATED",
   "RECONCILED",
 ]);

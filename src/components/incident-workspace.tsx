@@ -30,6 +30,7 @@ const stateLabels: Record<Incident["state"], string> = {
   ORIGINAL_PAID: "Original paid — replacement blocked",
   FAILURE_CONFIRMED_REPLACEABLE:
     "Failure confirmed — replacement may be prepared",
+  REPLACEMENT_PREPARED: "Replacement prepared — awaiting dispatch",
   ESCALATED: "Escalated — operator review",
   RECONCILED: "Reconciled",
 };
