@@ -788,7 +788,7 @@ export function IncidentWorkspace({
                     disabled={!decision.replacementAllowed}
                     title={
                       decision.replacementAllowed
-                        ? "Preparation is implemented in a later milestone."
+                        ? "Preparation exists at the backend service layer, but it is not exposed by this fixture UI."
                         : "Blocked by policy: a replacement cannot be prepared from the current evidence."
                     }
                   >
